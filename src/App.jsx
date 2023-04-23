@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 import './App.css'
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
 function App() {
   const [todo, setTodo] = useState("");
@@ -37,21 +39,8 @@ function App() {
     <div className='App'>
       <div className="container">
         <h1>Hello World</h1>
-        <form className='todoForm' onSubmit={handleSubmit}>
-          <input type="text" value={todo} onChange={(e) => setTodo(e.target.value)} />
-          <button type='submit'>{editId ? "Edit" : "Go"}</button>
-        </form>
-        <ul className='allTodos'>
-          {
-            todoList.map((obj, i) => {
-              return (<li className='singleTodo' key={obj.id}>
-                <span className='todoText'>{obj.todo}</span>
-                <button onClick={() => handleEdit(obj.id)}>Edit</button>
-                <button onClick={() => handleDelete(obj.id)}>Delete</button>
-              </li>)
-            })
-          }
-        </ul>
+        <TodoForm todo={todo} setTodo={setTodo} editId={editId} handleSubmit={handleSubmit} />
+        <TodoList todoList={todoList} handleEdit={handleEdit} handleDelete={handleDelete} />
       </div>
     </div>
   )
